@@ -1,0 +1,113 @@
+/* src/assets/css/dashboard.css */
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+:root {
+  --background-color: #f4f7fc;
+  --text-color: #333;
+  --card-background: #fff;
+  --card-border-color: #ddd;
+  --sidebar-background: #fff;
+  --sidebar-text-color: #333;
+  --sidebar-active-background: #0d6efd;
+  --sidebar-active-text-color: #fff;
+  --navbar-background: #fff;
+  --navbar-text-color: #333;
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #f1f1f1;
+  --card-background: #1e1e1e;
+  --card-border-color: #333;
+  --sidebar-background: #1e1e1e;
+  --sidebar-text-color: #f1f1f1;
+  --sidebar-active-background: #0d6efd;
+  --sidebar-active-text-color: #fff;
+  --navbar-background: #1e1e1e;
+  --navbar-text-color: #f1f1f1;
+  --primary-color: #0d6efd;
+  --secondary-color: #adb5bd;
+  --box-shadow: 0 0 1.2rem rgba(255, 255, 255, 0.05);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0a58ca;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Main Content
+--------------------------------------------------------------*/
+#main {
+  margin-top: 60px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Page Title
+--------------------------------------------------------------*/
+.pagetitle {
+  margin-bottom: 20px;
+}
+
+.pagetitle h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/*--------------------------------------------------------------
+# Cards
+--------------------------------------------------------------*/
+.card {
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border-color);
+}
+
+.card-header, .card-footer {
+  border-color: var(--card-border-color);
+  background-color: var(--card-background);
+}
+
+.card-title {
+  padding: 20px 20px 15px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.card-body {
+  padding: 0 20px 20px 20px;
+}

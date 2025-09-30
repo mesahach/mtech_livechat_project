@@ -1,76 +1,90 @@
-
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from './pages/TheHomePage.vue';
-import DashBoard from './pages/DashBoard.vue';
-import DashHome from './components/dashboard/HomePage.vue';
-import CreateEvent from './components/dashboard/CreateEvent.vue';
-import DashSettings from './components/dashboard/SettingsPage.vue';
-import DashNotFound from './components/dashboard/NotFoundPage.vue';
+import store from './store';
+
+// Page Components
+import AuthPage from './pages/AuthPage.vue';
 import NotFoundPage from './pages/NotFoundPage.vue';
-import Auth from './pages/AuthPage.vue';
-import { isLoggedIn } from './plugins/functions';
-import EventsToAttend from './components/dashboard/EventsToAttend.vue';
-import EventsIHost from './components/dashboard/EventsIHost.vue';
-import DiscoverEvents from './components/dashboard/DiscoverEvents.vue';
-import ViewEvent from './components/dashboard/ViewEvent.vue';
-import ProfilePage from './components/dashboard/ProfilePage.vue';
+
+// Dashboard Components
+import Dashboard from './views/Dashboard.vue';
+import DashboardIndex from './views/dashboard/Index.vue';
+import DashboardSettings from './views/dashboard/Settings.vue';
+import DashboardWidget from './views/dashboard/Widget.vue';
+import DashboardProfile from './views/dashboard/Profile.vue';
+import DashboardNotFound from './components/dashboard/NotFoundPage.vue';
+
+const routes = [
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: AuthPage,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuthenticated) {
+        next('/dashboard');
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/dashboard',
+    component: Dashboard,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuthenticated) {
+        next();
+      } else {
+        next('/auth');
+      }
+    },
+    children: [
+      {
+        path: '',
+        name: 'Dashboard',
+        component: DashboardIndex,
+      },
+      {
+        path: 'settings',
+        name: 'Settings',
+        component: DashboardSettings,
+      },
+      {
+        path: 'widget',
+        name: 'Widget',
+        component: DashboardWidget,
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: DashboardProfile,
+      },
+      {
+        path: ':pathMatch(.*)*',
+        name: 'DashboardNotFound',
+        component: DashboardNotFound,
+      },
+    ],
+  },
+  {
+    path: '/',
+    redirect: '/dashboard',
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFoundPage,
+  },
+];
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes: [
-        { path: '/', name: 'home', component: Home },
-        {
-            path: '/auth',
-            component: Auth,
-            beforeEnter: async (to, from, next) => {
-              await isLoggedIn().then((res) => {
-                if (res) {
-                  next('/dashboard');
-                } else {
-                  next();
-                }
-              });
-            },
-            children: [
-                { path: '', name: 'auth', component: Auth }, // fallback default
-                { path: 'login', name: 'login', component: Auth },
-                { path: 'register', name: 'register', component: Auth },
-            ]
-        },
-        {
-          path: '/dashboard',
-          component: DashBoard,
-          beforeEnter: async (to, from, next) => {
-            await isLoggedIn().then((res) => {
-              if (res) {
-                next();
-              } else {
-                next('/auth/login');
-              }
-            });
-          },
-          children: [
-            { path: '',           name: 'dash-home',   component: DashHome },
-            { path: 'CreateEvent',      name: 'create-event',  component: CreateEvent, props: true },
-            { path: 'settings',   name: 'dash-settings',    component: DashSettings },
-            { path: 'EventsToAttend',   name: 'events-to-attend',    component: EventsToAttend },
-            { path: 'EventsIHost',   name: 'events-i-host',    component: EventsIHost },
-            { path: 'DiscoverEvents',   name: 'discover-events',    component: DiscoverEvents },
-            { path: 'ViewEvent/:id',   name: 'ViewEvent',    component: ViewEvent, props: true },
-            { path: 'Profile',   name: 'profile',    component: ProfilePage },
-            // fallback inside dashboard
-            { path: ':pathMatch(.*)*', name: 'dash-404', component: DashNotFound }
-          ]
-        },
-        { path: '/:catchAll(.*)', name: 'notFound', component: NotFoundPage },
-    ],
-    linkActiveClass: 'active',
-    scrollBehavior(_, _2, savedPosition) {
-      if (savedPosition) {
-        return savedPosition;
-      }
-      return { left: 0, top: 0, behavior: 'smooth' };
-    },
+  history: createWebHashHistory(),
+  routes,
+  linkActiveClass: 'active',
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { left: 0, top: 0 };
+  },
 });
 
 export default router;
