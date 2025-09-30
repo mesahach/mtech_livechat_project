@@ -2,9 +2,6 @@
     <div class="auth-container">
       <!-- Header -->
       <div class="auth-header">
-        <router-link to="/" class="back-to-home">
-          <i class="fas fa-arrow-left me-2"></i> Back to Home
-        </router-link>
         <router-link to="/" class="navbar-brand">
           <i class="fas fa-star me-2"></i>Event Spotlight
         </router-link>
@@ -92,4 +89,3 @@
   <style scoped>
   @import '@/assets/css/auth.css';
   </style>
-  

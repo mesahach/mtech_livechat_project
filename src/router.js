@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import store from './store';
 
 // Page Components
+import HomePage from './pages/HomePage.vue';
 import AuthPage from './pages/AuthPage.vue';
 import NotFoundPage from './pages/NotFoundPage.vue';
 
@@ -14,6 +15,11 @@ import DashboardProfile from './views/dashboard/Profile.vue';
 import DashboardNotFound from './components/dashboard/NotFoundPage.vue';
 
 const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: HomePage,
+  },
   {
     path: '/auth',
     name: 'Auth',
@@ -63,10 +69,6 @@ const routes = [
         component: DashboardNotFound,
       },
     ],
-  },
-  {
-    path: '/',
-    redirect: '/dashboard',
   },
   {
     path: '/:pathMatch(.*)*',
