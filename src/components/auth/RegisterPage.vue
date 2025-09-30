@@ -46,7 +46,7 @@
 </div>
     <!-- Email -->
     <BFormFloatingLabel 
-    label="Customer Email"
+    label="Organization Email e.\g example@\domain.\com"
     label-for="emailAddr"
     :invalid-feedback="errors.email"
     :state="errors.email ? true : false"
@@ -55,7 +55,7 @@
       <BFormInput 
       v-model="formData.email" 
       id="emailAddr" 
-      placeholder="Enter Email Address"
+      placeholder="example@domain.com"
       type="email" 
       class="border rounded" 
       required 
@@ -68,7 +68,7 @@
 
     <!-- Phone -->
     <BFormFloatingLabel 
-    label="Phone Number"
+    label="Phone Number (Optional)"
     label-for="phone"
     :invalid-feedback="errors.phone"
     :state="errors.phone ? true : false"
@@ -80,7 +80,7 @@
       placeholder="Enter Phone Number"
       inputType="tel" 
       class="border rounded" 
-      required 
+      required="false" 
       />
       <BFormInvalidFeedback 
       :state="errors.phone ? true : false"

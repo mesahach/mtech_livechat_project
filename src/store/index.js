@@ -1,10 +1,10 @@
 import { createStore } from 'vuex';
-import { fetchUserData, fetchCategories } from '@/plugins/functions';
+import { fetchUserData } from '@/plugins/functions';
 
 export default createStore({
   state: {
     user: null,
-    token: localStorage.getItem('token') || '',
+    token: localStorage.getItem('userToken') || '',
     categories: [],
   },
   mutations: {
@@ -13,12 +13,12 @@ export default createStore({
     },
     SET_TOKEN(state, token) {
       state.token = token;
-      localStorage.setItem('token', token);
+      localStorage.setItem('userToken', token);
     },
     CLEAR_USER_DATA(state) {
       state.user = null;
       state.token = '';
-      localStorage.removeItem('token');
+      localStorage.removeItem('userToken');
     },
     SET_CAT(state, categories) {
       state.categories = categories;
@@ -36,12 +36,14 @@ export default createStore({
       }
     },
     async getCategories({ commit }) {
-        try{
-            const categories = await fetchCategories();
-            commit('SET_CAT', categories);
-        } catch(error) {
-            //
-        }
+      commit('SET_CAT', ['Dashboard', 'Conversations', 'AI Tools', 'Customers', 'Statistics', 'Usage', 'Settings', 'Help']);
+      // commit('SET_SEC_CAT', []);
+        // try{
+        //     const categories = await fetchCategories();
+        //     commit('SET_CAT', categories);
+        // } catch(error) {
+        //     //
+        // }
     },
     logout({ commit }) {
         commit('CLEAR_USER_DATA');

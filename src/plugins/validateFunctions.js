@@ -118,13 +118,13 @@ const errors = {};
 if (!formData.firstName) errors.firstName = 'First Name is required';
 if (!formData.lastName) errors.lastName = 'Last Name is required';
 if (!formData.email) errors.email = 'Email is required';
-if (!formData.phone) errors.phone = 'Phone number is required';
+// if (!formData.phone) errors.phone = 'Phone number is required';
 if (!validateCaptcha()) errors.recaptcha = 'Please complete the CAPTCHA verification';
 
 const firstNameErr = validateFirstName(formData.firstName);
 const lastNameErr = validateLastName(formData.lastName);
 const emailErr = validateEmail(formData.email);
-const phoneErr = validatePhone(formData.phone);
+// const phoneErr = validatePhone(formData.phone);
 const passwordErr = validatePassword(formData.password);
 const confirmPasswordErr = validateConfirmPassword(formData.password, formData.c_password);
 const captchaErr = validateCaptcha();
@@ -133,7 +133,7 @@ const newErrors = {
     firstName: firstNameErr, 
     lastName: lastNameErr, 
     email: emailErr, 
-    phone: phoneErr, 
+    // phone: phoneErr, 
     password: passwordErr, 
     confirmPassword: confirmPasswordErr, 
     recaptcha: captchaErr 
@@ -144,7 +144,7 @@ const isValid =
 !firstNameErr && 
 !lastNameErr && 
 !emailErr && 
-!phoneErr && 
+// !phoneErr && 
 !passwordErr && 
 !confirmPasswordErr && 
 !captchaErr;
@@ -155,7 +155,7 @@ setErrors({
     firstName: null, 
     lastName: null, 
     email: null, 
-    phone: null, 
+    // phone: null, 
     password: null, 
     confirmPassword: null, 
     recaptcha: null 
